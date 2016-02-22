@@ -1,8 +1,8 @@
 # ApiBatch
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/api_batch`. To experiment with that code, run `bin/console` for an interactive prompt.
+Welcome to ApiBatch!
 
-TODO: Delete this and the text above, and describe your gem
+ApiBatch adds a BatchController to your api that allows multiple api requests to be sent to your api within a single http request saving round trips to the server.
 
 ## Installation
 
@@ -22,7 +22,27 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Once the gem has been installed a controller will have been added to the following route:
+
+    /batch
+
+batch requests are sent to the server through a query string parameter array:
+
+paths[]=........
+
+Example:
+
+    http://[host]/batch?paths[]=/countries/id/1&paths[]=/countrygroups/id/2
+
+The above batch request would send 2 requests to the server for processing:
+
+- /countries/id/1
+- /countrygroups/id/2
+
+These 2 request will be passed to the appropriate controllers and processed on the server as if they had bee sent as individual requests. The response from the batch request will return an array of the responses from each request specified in the paths[] array parameter in the order they were specified in the request.
+
+> Example:
+> [{response to /countries/id/1}, {response to /countrygroups/id/2}]
 
 ## Development
 

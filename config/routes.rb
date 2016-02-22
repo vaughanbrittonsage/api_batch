@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  get 'batch' => 'batch#get'
+  get 'batch' => 'api_batch/batch#get'
 end

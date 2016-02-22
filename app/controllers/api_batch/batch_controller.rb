@@ -17,7 +17,9 @@ module ApiBatch
         controller.request.path_parameters = request_params.with_indifferent_access
         controller.response = ActionDispatch::Response.new
         controller.send request_params[:action]
-        response.push(controller.response.body)
+        result = JSON.load(controller.response.body)
+
+        response.push(result)
 
       end
 
